@@ -18,6 +18,12 @@ import { Tab } from 'vant';
 import { Tabs } from 'vant';
 import { List } from 'vant';
 import { PullRefresh } from 'vant';
+import { SwipeCell } from 'vant';
+import { Button } from 'vant';
+
+Vue.use(Button);
+
+Vue.use(SwipeCell)
 
 Vue.use(PullRefresh);
 

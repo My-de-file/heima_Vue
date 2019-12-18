@@ -49,3 +49,13 @@ export const comment = (id)=>{
         url:`/post_comment/${id}`
     })
 }
+export const Myconcern = ()=>{
+    return axios ({
+        url:`/user_follows`
+    })
+}
+export const enshrine = ()=>{
+    return axios ({
+        url:`/user_star`
+    })
+}

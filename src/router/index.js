@@ -16,7 +16,10 @@ import Register from '@/views/Register.vue'
 import index from '@/views/index.vue'
 
 import Details from '@/views/Details.vue'
-// export const Details = ()
+
+import My_concern from '@/views/My_concern.vue'
+
+import My_enshrine from '@/views/My_enshrine.vue'
 
 
 // 将路由模块挂载到vue实列里面
@@ -54,6 +57,16 @@ var router = new VueRouter({
             name:'Details',
             path:'/details/:id',
             component:Details
+        },
+        {
+            name:'My_concern',
+            path:'/my_concern',
+            component:My_concern
+        },
+        {
+            name:'My_enshrine',
+            path:'/My_enshrine',
+            component:My_enshrine
         }
     ]
 })

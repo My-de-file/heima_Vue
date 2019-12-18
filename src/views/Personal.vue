@@ -14,14 +14,15 @@
         <span class="iconfont iconjiantou1"></span>
       </div>
     </router-link>
-    <hmcell title="我的关注" desc="关注的用户"></hmcell>
+    <hmcell title="我的关注" desc="关注的用户" @click="$router.push({path:'/my_concern'})"></hmcell>
     <hmcell title="我的跟帖" desc="跟帖/回复"></hmcell>
-    <hmcell title="我的收藏" desc="文章/视频"></hmcell>
+    <hmcell title="我的收藏" desc="文章/视频" @click="$router.push({path:'/My_enshrine'})"></hmcell>
     <hmcell title="设置" ></hmcell>
   </div>
 </template>
 
 <script>
+
 import {userPersonal} from '@/api/users.js'
 import hmcell from '@/components/hm_cell.vue'
 export default {
