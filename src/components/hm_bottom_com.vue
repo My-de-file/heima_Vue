@@ -1,8 +1,8 @@
 <template>
   <div class="comment">
     <div class="addcomment" v-show='!isFocus'>
-      <input type="text" placeholder="写跟帖" @focus="handlerFocus" />
-      <span class="comment">
+      <input type="text" placeholder='写跟贴' @focus="handlerFocus" />
+      <span class="comment" @click="$router.push({path:`/comments/${$route.params.id}`})">
         <i class="iconfont iconpinglun-"></i>
         <em>{{transmission.comment_length}}</em>
       </span>
@@ -13,7 +13,7 @@
         <textarea  ref='commtext' rows="5" v-model="fromdata"></textarea>
         <div>
             <span @click="from">发送</span>
-            <span @click='isFocus=false'>取消</span>
+            <span @click="quxiao">取消</span>
         </div>
     </div>
   </div>
@@ -21,20 +21,30 @@
 
 
 <script>
+//comment
 import {collect1} from '@/api/article.js'
-import {comment} from '@/api/article.js'
 export default {
-    props:['transmission'],
+    props:['transmission','parameter'],
   data () {
     return {
       isFocus: false,
-      fromdata:''
+      fromdata:'',
+      handlertext:''
+    }
+  },
+  watch: {
+    parameter(){
+      window.console.log(this.parameter)
+      if(this.parameter){
+        this.isFocus = true
+        this.handlertext = this.parameter.user.nickname
+      }
     }
   },
   methods: {
     //   获取焦点时触发
     handlerFocus () {
-      this.isFocus = !this.isFocus
+      this.isFocus = true
       setTimeout(() => {
         this.$refs.commtext.focus()
       }, 1)
@@ -46,9 +56,15 @@ export default {
      this.transmission.has_star = !this.transmission.has_star
     },
     async from(){
-        let res = await comment(this.transmission.id,{content:this.fromdata})
-        window.console.log(res)
-      }
+      this.isFocus=false
+      // window.console.log(this.fromdata)
+      // window.console.log(this.transmission.id)
+        this.$emit('addcomment',this.fromdata,this.parameter.id)
+      },
+    quxiao(){
+    this.isFocus=false
+    this.$emit('click')
+  }
   }
 }
 </script>

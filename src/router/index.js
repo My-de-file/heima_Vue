@@ -21,8 +21,11 @@ import My_concern from '@/views/My_concern.vue'
 
 import My_enshrine from '@/views/My_enshrine.vue'
 
+import Comments from '@/views/comments.vue'
 
-// 将路由模块挂载到vue实列里面
+
+
+// 将路由模块挂载到vue实列里面Comments
 Vue.use(VueRouter)
 
 // 创建路由
@@ -67,6 +70,11 @@ var router = new VueRouter({
             name:'My_enshrine',
             path:'/My_enshrine',
             component:My_enshrine
+        },
+        {
+            name:'Comments',
+            path:'/comments/:id',
+            component:Comments
         }
     ]
 })

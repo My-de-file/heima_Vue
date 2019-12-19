@@ -44,9 +44,17 @@ export const collect1 = (id)=>{
         url:`/post_star/${id}`
     })
 }
-export const comment = (id)=>{
+export const comment = (id,data)=>{
     return axios ({
-        url:`/post_comment/${id}`
+        method:'post',
+        url:`/post_comment/${id}`,
+        data
+    })
+}
+export const comment1 = (id,params)=>{
+    return axios ({
+        url:`/post_comment/${id}`,
+        params
     })
 }
 export const Myconcern = ()=>{
@@ -59,3 +67,13 @@ export const enshrine = ()=>{
         url:`/user_star`
     })
 }
+export const comments = ()=>{
+    return axios ({
+        url:'/user_comments'
+    })
+}
+
+
+
+
+// /user_comments

@@ -42,7 +42,7 @@
       </div>
       <div class="more">更多跟帖</div>
     </div>
-    <bottoncom v-if='mydata.content' :transmission='mydata'></bottoncom>
+    <bottoncom v-if='mydata.content' :transmission='mydata' @click="fabu"></bottoncom>
   </div>
 </template>
 
@@ -52,6 +52,7 @@ import {attention1} from '@/api/article.js'
 import {Unfriended} from '@/api/article.js'
 import {Like} from '@/api/article.js'
 import bottoncom from '@/components/hm_bottom_com.vue'
+import {comment1} from '@/api/article.js'
 import {comment} from '@/api/article.js'
 export default {
     data () {
@@ -73,14 +74,15 @@ export default {
     
     //   window.console.log(this.$route.params.id)
      let res = await getArticleDetail(this.$route.params.id)
-     window.console.log(res)
+    //  window.console.log(res)
      if(res.status===200){
          this.mydata = res.data.data
      }
      window.console.log(this.mydata)
-     let res2 = await comment(this.mydata.id)
-     window.console.log(res2)
+     let res2 = await comment1(this.mydata.id)
+    //  window.console.log(res2)
     if(res2.status===200){
+      window.console.log(res2.data.data)
       this.comment1 = res2.data.data.map((value)=>{
           if(value.user.head_img){
            value.user.head_img = localStorage.getItem('hema_img')+value.user.head_img
@@ -89,7 +91,7 @@ export default {
              ...value,
            }
          })
-      window.console.log(this.comment1)
+      // window.console.log(this.comment1)
     }
     },
     methods: {
@@ -100,14 +102,14 @@ export default {
         this.mydata.has_follow = !this.mydata.has_follow
             } else{
         let res = await attention1(this.mydata.user.id)
-        window.console.log(res)
+        // window.console.log(res)
         this.$toast.success(res.data.message)
         this.mydata.has_follow = !this.mydata.has_follow
             }
         },
        async Likede(){
           let res = await Like(this.mydata.id)
-          window.console.log(res)
+          // window.console.log(res)
           if(res.data.message ==='点赞成功'){
               this.mydata.like_length++
           } else{
@@ -115,6 +117,14 @@ export default {
           }
           this.mydata.has_like = !this.mydata.has_like
           this.$toast.success(res.data.message)
+        },
+       async fabu(fromdata){
+        let res = await comment(this.mydata.id,{content:fromdata})
+        // window.console.log(res)
+        if(res.data.message === "评论发布成功"){
+          this.$toast.success('发布成功')
+          this.isFocus = false
+        }
         }
     }
 }
